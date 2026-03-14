@@ -141,8 +141,8 @@ function Menu.ApplyTheme(themeName)
     Menu.CurrentTheme = themeName
     
     if themeLower == "red" then
-        Menu.Colors.HeaderPink = { r = 255, g = 0, b = 0 }
-        Menu.Colors.SelectedBg = { r = 255, g = 0, b = 0 }
+        Menu.Colors.HeaderPink = { r = 30, g = 100, b = 255 }
+        Menu.Colors.SelectedBg = { r = 30, g = 100, b = 255 }
         Menu.Banner.imageUrl = "https://imgur.com/a/s6FTtiL"
         Menu.CurrentTheme = "Red"
     elseif themeLower == "purple" then
