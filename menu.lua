@@ -70,8 +70,8 @@ function Menu.UpdateCategoriesFromTopTab()
 end
 
 Menu.Banner = {
-    enabled = false, -- Disabled to match the blue theme better
-    imageUrl = "https://imgur.com/a/WGMEDUs",
+    enabled = true,
+    imageUrl = "https://i.imgur.com/3n9wVhm.png",
     height = 100
 }
 
@@ -122,30 +122,25 @@ function Menu.LoadBannerTexture(url)
 end
 
 Menu.Colors = {
-    HeaderPink = { r = 0, g = 100, b = 255 },     -- Deep Blue Header
-    SelectedBg = { r = 0, g = 100, b = 255 },     -- Deep Blue Selection
+    HeaderPink = { r = 30, g = 100, b = 255 },
+    SelectedBg = { r = 30, g = 100, b = 255 },
     TextWhite = { r = 255, g = 255, b = 255 },
-    BackgroundDark = { r = 5, g = 5, b = 15 },    -- Very Dark Navy Background
+    BackgroundDark = { r = 0, g = 0, b = 0 },
     FooterBlack = { r = 0, g = 0, b = 0 }
 }
 
-Menu.CurrentTheme = "Purple"
+Menu.CurrentTheme = "Blue"
 
 function Menu.ApplyTheme(themeName)
     if not themeName or type(themeName) ~= "string" then
-        themeName = "Purple"
+        themeName = "Blue"
     end
     
     -- Normaliser la casse pour la comparaison
     local themeLower = string.lower(themeName)
     Menu.CurrentTheme = themeName
     
-    if themeLower == "blue" or themeLower == "deepblue" then
-        Menu.Colors.HeaderPink = { r = 0, g = 100, b = 255 }
-        Menu.Colors.SelectedBg = { r = 0, g = 100, b = 255 }
-        Menu.Banner.enabled = false
-        Menu.CurrentTheme = "Deep Blue"
-    elseif themeLower == "red" then
+    if themeLower == "red" then
         Menu.Colors.HeaderPink = { r = 255, g = 0, b = 0 }
         Menu.Colors.SelectedBg = { r = 255, g = 0, b = 0 }
         Menu.Banner.imageUrl = "https://imgur.com/a/s6FTtiL"
@@ -165,11 +160,16 @@ function Menu.ApplyTheme(themeName)
         Menu.Colors.SelectedBg = { r = 255, g = 20, b = 147 }
         Menu.Banner.imageUrl = "https://imgur.com/a/s6FTtiL"
         Menu.CurrentTheme = "pink"
+    elseif themeLower == "blue" then
+        Menu.Colors.HeaderPink = { r = 30, g = 100, b = 255 }
+        Menu.Colors.SelectedBg = { r = 30, g = 100, b = 255 }
+        Menu.Banner.imageUrl = "https://i.imgur.com/3n9wVhm.png"
+        Menu.CurrentTheme = "Blue"
     else
-        Menu.Colors.HeaderPink = { r = 0, g = 100, b = 255 }
-        Menu.Colors.SelectedBg = { r = 0, g = 100, b = 255 }
-        Menu.Banner.enabled = false
-        Menu.CurrentTheme = "Deep Blue"
+        Menu.Colors.HeaderPink = { r = 30, g = 100, b = 255 }
+        Menu.Colors.SelectedBg = { r = 30, g = 100, b = 255 }
+        Menu.Banner.imageUrl = "https://i.imgur.com/3n9wVhm.png"
+        Menu.CurrentTheme = "Blue"
     end
 
     if Menu.Banner.enabled and Menu.Banner.imageUrl then
@@ -1074,9 +1074,9 @@ function Menu.DrawCategories()
     local itemY = startY
     
     -- Dégradé pour la barre Main Menu (même style que les tabs)
-    local baseR = (Menu.Colors.HeaderPink and Menu.Colors.HeaderPink.r) and (Menu.Colors.HeaderPink.r / 255.0) or 0.58
-    local baseG = (Menu.Colors.HeaderPink and Menu.Colors.HeaderPink.g) and (Menu.Colors.HeaderPink.g / 255.0) or 0.0
-    local baseB = (Menu.Colors.HeaderPink and Menu.Colors.HeaderPink.b) and (Menu.Colors.HeaderPink.b / 255.0) or 0.83
+    local baseR = (Menu.Colors.HeaderPink and Menu.Colors.HeaderPink.r) and (Menu.Colors.HeaderPink.r / 255.0) or 0.12
+    local baseG = (Menu.Colors.HeaderPink and Menu.Colors.HeaderPink.g) and (Menu.Colors.HeaderPink.g / 255.0) or 0.39
+    local baseB = (Menu.Colors.HeaderPink and Menu.Colors.HeaderPink.b) and (Menu.Colors.HeaderPink.b / 255.0) or 1.0
     
     local gradientSteps = 40
     local stepHeight = mainMenuHeight / gradientSteps
@@ -1110,7 +1110,6 @@ function Menu.DrawCategories()
              Menu.DrawRect(x, stepY, width, actualStepHeight, math.floor(stepR*255), math.floor(stepG*255), math.floor(stepB*255), math.floor(alpha*255))
         end
     end
-    
     if Menu.TopLevelTabs then
         local tabCount = #Menu.TopLevelTabs
         local tabWidth = width / tabCount
